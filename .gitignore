@@ -9,6 +9,8 @@ npm-debug.*
 *.orig.*
 web-build/
 
+KEYS.js
+
 # macOS
 .DS_Store
 src/projects/food-search/api/key.js

@@ -6,6 +6,7 @@ const authRoutes = require('./routes/authRoutes');
 const trackRoutes = require('./routes/trackRoutes');
 const bodyParser = require('body-parser');
 const requireAuth = require('./middlewares/requireAuth');
+const { MONGO_URI } = require('../KEYS');
 
 const app = express();
 
@@ -14,8 +15,7 @@ app.use(bodyParser.json());
 app.use(authRoutes);
 app.use(trackRoutes);
 
-const mongoUri = 'mongodb+srv://admin:admin@cluster0.qp2as.mongodb.net/<dbname>?retryWrites=true&w=majority'
-mongoose.connect(mongoUri, {
+mongoose.connect(MONGO_URI, {
     useNewUrlParser: true,
     useCreateIndex: true
 });

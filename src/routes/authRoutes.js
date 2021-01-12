@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const jwt = require('jsonwebtoken');
+const { SECRET_KEY } = require('../../KEYS');
 
 const router = express.Router();
 
@@ -12,7 +13,7 @@ router.post('/signup', async (req, res) => {
         const user = new User({ email, password });
         await user.save();
 
-        const token = jwt.sign({ userId: user._id }, 'MY_KEY');
+        const token = jwt.sign({ userId: user._id }, SECRET_KEY);
 
         res.send({ token });
     } catch (err) {
@@ -35,7 +36,7 @@ router.post('/signin', async (req, res) => {
 
     try {
         await user.comparePassword(password);
-        const token = jwt.sign({ userId: user._id }, 'MY_KEY');
+        const token = jwt.sign({ userId: user._id }, SECRET_KEY);
 
         res.send({ token });
     } catch (err) {
